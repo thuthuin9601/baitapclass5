@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="On()">ON</button>
+    <button onclick="Off()">OFF</button>
+    <div id="result"></div>
+</body>
+</html>
+<script>
+    class EletricLamp{
+        constructor(name){
+            this.name=name
+        };
+        turnOn(){
+            document.getElementById('result').innerHTML =this.name+': light'+'<br>';
+        }
+        turnOff(){
+            document.getElementById('result').innerHTML =this.name+': dảk'+'<br>';
+        }
+    }
+    class SwitchButton{
+        constructor(){
+            this.number=0;
+        };
+        connectToLamp(EletricLamp){
+            this.EletricLamp=EletricLamp;
+        }
+        switchOn() {
+            this.status = true;
+        }
+        switchOff() {
+            this.status = false;
+        }
+        light() {
+            if(this.status){
+                this.EletricLamp.turnOn();
+            } 
+            else {
+                this.EletricLamp.turnOff();
+            }
+        };
+        count(){
+            if(this.status){
+                this.number++;
+                return('Number: '+this.number);
+            }
+        }
+    }
+let OnOff= new SwitchButton();
+let RangDong= new EletricLamp('Rang Dong');
+OnOff.connectToLamp(RangDong);
+function On(){
+    OnOff.switchOn();
+    OnOff.light()
+    console.log(OnOff.count())
+}
+function Off(){
+    OnOff.switchOff();
+OnOff.light();
+OnOff.count();
+}
+
+   
+</script>
